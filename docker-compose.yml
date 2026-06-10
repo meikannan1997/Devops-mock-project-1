@@ -1,0 +1,24 @@
+services:
+  mongo:
+    image: mongo
+    ports:
+      - 8080:27017
+  backend:
+    build: ./backend
+    ports:
+      - 8000:8000
+    environment:
+      PORT: 8000
+      MONGO_URI: mongodb://mongo:27017/todo-db
+    depends_on:
+      - mongo
+    env_file:
+      - ./backend/.env.prod
+  frontend:
+    build: ./frontend
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+    env_file:
+      - ./frontend/.env.prod
