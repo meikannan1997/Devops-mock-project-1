@@ -6,14 +6,14 @@ services:
   backend:
     build: ./backend
     ports:
-      - 8000:8000
+      - 5001:5001
     environment:
-      PORT: 8000
+      PORT: 5001
       MONGO_URI: mongodb://mongo:27017/todo-db
     depends_on:
       - mongo
     env_file:
-      - ./backend/.env.prod
+      - ./backend/.env
   frontend:
     build: ./frontend
     ports:
